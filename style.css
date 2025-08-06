@@ -122,10 +122,13 @@ h3{
     h2 {
         font-size: 1.1rem;
     }
+    h3{
+        font-size: 0.8rem;
+    }
 
     .btn {
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
         border-width: 6px;
         margin: 10px;
     }
@@ -139,8 +142,8 @@ h3{
 
 @media (max-width: 480px) {
     .btn {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         border-width: 4px;
     }
 
