@@ -4,7 +4,7 @@ let gameStart = false;
 let level = 0;
 
 let h2 = document.querySelector("h2");
-let h = document.querySelectorAll("h2");
+let h3 = document.querySelector("h3");
 let btns = ["btn-1", "btn-2", "btn-3", "btn-4"];
 let startBtn = document.querySelector("#start-btn");
 let answerBtn = document.querySelector("#ans-btn");
@@ -22,7 +22,7 @@ startBtn.addEventListener("click", function () {
 });
 
 function levelUp() {
-  h[1].style.display = "none";
+  // h3.style.display = "none";
   userInp = [];
   level++;
   h2.innerText = `Level ${level}`;
@@ -67,7 +67,7 @@ for (let btn of selBtns) {
 }
 
 function reset() {
-  h[1].style.display = "block";
+  h3.style.display = "block";
   gameStart = false;
   userInp = [];
   level = 0;
@@ -79,6 +79,6 @@ answerBtn.addEventListener("click", function () {
   let delay = 0;
   for (let i = 0; i < compInp.length; i++) {
     let btn = document.querySelector(`.${compInp[i]}`);
-    setTimeout(() => flash(btn), 400 * i);
+    setTimeout(() => flash(btn), 300 * i);
   }
 });
