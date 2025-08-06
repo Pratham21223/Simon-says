@@ -11,7 +11,6 @@ h1 {
     color: #FF9933;
     font-size: 3rem;
     font-weight: 800;
-    text-align: center;
     text-shadow: 0 0 10px rgba(77, 166, 255, 0.6);
     margin-bottom: 0.5rem;
 }
@@ -20,14 +19,19 @@ h2 {
     color: #e0e0e0;
     font-size: 1.5rem;
     font-weight: 600;
-    text-align: center;
     margin-top: 0;
     margin-bottom: 1rem;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
 }
-h3{
-    color: #8affc1 ;
+
+h3 {
+    color: #8affc1;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    text-shadow: 0 0 4px rgba(138, 255, 193, 0.2);
 }
+
 .line {
     display: flex;
     justify-content: center;
@@ -42,7 +46,7 @@ h3{
     border-radius: 20%;
     border: solid 10px #f2f4f7;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
 }
 
 .btn:hover {
@@ -50,18 +54,20 @@ h3{
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
 }
 
-/* Final button colors */
-.btn-1 { background-color: #3B82F6; }  /* Blue */
-.btn-2 { background-color: #10B981; }  /* Green */
-.btn-3 { background-color: #FACC15; }  /* Yellow */
-.btn-4 { background-color: #EC4899; }  /* Pink */
-
-.flash {
-    background-color: #F8FAFC !important;
-    box-shadow: 0 0 20px white;
+.btn:active {
+    transform: scale(0.95);
 }
 
-/* Start Game Button */
+.btn-1 { background-color: #3B82F6; }
+.btn-2 { background-color: #10B981; }
+.btn-3 { background-color: #FACC15; }
+.btn-4 { background-color: #EC4899; }
+
+.flash {
+    background-color: #fef08a !important;
+    box-shadow: 0 0 20px #fef3c7;
+}
+
 #start-btn {
     padding: 14px 28px;
     font-size: 1.2rem;
@@ -87,7 +93,6 @@ h3{
     box-shadow: 0 3px 10px rgba(236, 72, 153, 0.3);
 }
 
-/* Show Answer Button */
 #ans-btn {
     padding: 12px 26px;
     font-size: 1.2rem;
@@ -113,34 +118,56 @@ h3{
     box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
 }
 
-/* RESPONSIVE STYLING */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    .btn {
+        width: 140px;
+        height: 140px;
+        border-width: 8px;
+    }
+
     h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
         font-size: 1.1rem;
-    }
-
-    .btn {
-        width: 120px;
-        height: 120px;
-        border-width: 6px;
-        margin: 10px;
-    }
-
-    #start-btn, #ans-btn {
-        font-size: 1rem;
-        padding: 12px 20px;
-        margin: 20px auto;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .btn {
-        width: 90px;
-        height: 90px;
+        width: 100px;
+        height: 100px;
+        border-width: 6px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    #start-btn,
+    #ans-btn {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .btn {
+        width: 80px;
+        height: 80px;
         border-width: 4px;
     }
 
@@ -148,8 +175,17 @@ h3{
         font-size: 1.5rem;
     }
 
-    #start-btn, #ans-btn {
+    h2 {
         font-size: 0.9rem;
-        padding: 10px 18px;
+    }
+
+    h3 {
+        font-size: 0.9rem;
+    }
+
+    #start-btn,
+    #ans-btn {
+        font-size: 0.85rem;
+        padding: 8px 14px;
     }
 }
