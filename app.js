@@ -3,26 +3,26 @@ let compInp = [];
 let gameStart = false;
 let level = 0;
 
-let h2 = document.querySelector('h2');
-let h = document.querySelectorAll('h2');
-let btns = ['btn-1', 'btn-2', 'btn-3', 'btn-4'];
-let startBtn = document.querySelector('#start-btn');
-let answerBtn = document.querySelector('#ans-btn');
+let h2 = document.querySelector("h2");
+let h = document.querySelectorAll("h2");
+let btns = ["btn-1", "btn-2", "btn-3", "btn-4"];
+let startBtn = document.querySelector("#start-btn");
+let answerBtn = document.querySelector("#ans-btn");
 
-startBtn.addEventListener('click', function () {
+startBtn.addEventListener("click", function () {
   if (!gameStart) {
     compInp = [];
     level = 0;
     userInp = [];
     levelUp();
     gameStart = true;
-    startBtn.style.display = 'none';
-    answerBtn.style.display = 'none';
+    startBtn.style.display = "none";
+    answerBtn.style.display = "none";
   }
 });
 
 function levelUp() {
-  h[1].style.display = 'none';
+  h[1].style.display = "none";
   userInp = [];
   level++;
   h2.innerText = `Level ${level}`;
@@ -33,9 +33,9 @@ function levelUp() {
 }
 
 function flash(btn) {
-  btn.classList.add('flash');
+  btn.classList.add("flash");
   setTimeout(function () {
-    btn.classList.remove('flash');
+    btn.classList.remove("flash");
   }, 300);
 }
 
@@ -46,7 +46,7 @@ function checkAns(idx) {
     }
   } else {
     h2.innerHTML = `Game over! Your score was <i><b>${level - 1}<b></i>.`;
-    answerBtn.style.display = 'inline-block';
+    answerBtn.style.display = "inline-block";
     reset();
   }
 }
@@ -55,27 +55,27 @@ function user() {
   if (gameStart) {
     let btn = this;
     flash(btn);
-    let userColor = btn.getAttribute('id');
+    let userColor = btn.getAttribute("id");
     userInp.push(userColor);
     checkAns(userInp.length - 1);
   }
 }
 
-let selBtns = document.querySelectorAll('.btn');
+let selBtns = document.querySelectorAll(".btn");
 for (let btn of selBtns) {
-  btn.addEventListener('click', user);
+  btn.addEventListener("click", user);
 }
 
 function reset() {
-  h[1].style.display = 'block';
+  h[1].style.display = "block";
   gameStart = false;
   userInp = [];
   level = 0;
-  startBtn.style.display = 'inline-block';
+  startBtn.style.display = "inline-block";
 }
 
 // ✅ Flash sequence when "Show Answer" is clicked
-answerBtn.addEventListener('click', function () {
+answerBtn.addEventListener("click", function () {
   let delay = 0;
   for (let i = 0; i < compInp.length; i++) {
     let btn = document.querySelector(`.${compInp[i]}`);
