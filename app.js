@@ -6,19 +6,23 @@ let level = 0;
 let h2 = document.querySelector('h2');
 let h = document.querySelectorAll('h2');
 let btns = ['btn-1', 'btn-2', 'btn-3', 'btn-4'];
-let startBtn = document.querySelector('#start-btn'); // ✅ Start button
+let startBtn = document.querySelector('#start-btn');
+let answerBtn = document.querySelector('#ans-btn');
 
-// ✅ Start button click
 startBtn.addEventListener('click', function () {
   if (!gameStart) {
+    compInp = [];
+    level = 0;
+    userInp = [];
     levelUp();
     gameStart = true;
-    startBtn.style.display = 'none'; // hide button once game starts
+    startBtn.style.display = 'none';
+    answerBtn.style.display = 'none';
   }
 });
 
 function levelUp() {
-  h[1].style.display = 'none'; // hide instructions
+  h[1].style.display = 'none';
   userInp = [];
   level++;
   h2.innerText = `Level ${level}`;
@@ -41,7 +45,8 @@ function checkAns(idx) {
       setTimeout(levelUp, 1000);
     }
   } else {
-    h2.innerHTML = `Game over! Your score was <b>${level - 1}</b>`;
+    h2.innerHTML = `Game over! Your score was <i><b>${level - 1}<b></i>.`;
+    answerBtn.style.display = 'inline-block';
     reset();
   }
 }
@@ -62,10 +67,18 @@ for (let btn of selBtns) {
 }
 
 function reset() {
-  h[1].style.display = 'block'; // show instructions
+  h[1].style.display = 'block';
   gameStart = false;
   userInp = [];
-  compInp = [];
   level = 0;
-  startBtn.style.display = 'inline-block'; // ✅ show button again
+  startBtn.style.display = 'inline-block';
 }
+
+// ✅ Flash sequence when "Show Answer" is clicked
+answerBtn.addEventListener('click', function () {
+  let delay = 0;
+  for (let i = 0; i < compInp.length; i++) {
+    let btn = document.querySelector(`.${compInp[i]}`);
+    setTimeout(() => flash(btn), 400 * i);
+  }
+});
