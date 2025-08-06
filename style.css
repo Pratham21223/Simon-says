@@ -115,7 +115,7 @@ h3{
 
 /* RESPONSIVE STYLING */
 @media (max-width: 768px) {
-    h1 {
+    /* h1 {
         font-size: 2rem;
     }
 
@@ -124,7 +124,7 @@ h3{
     }
     h3{
         font-size: 0.8rem;
-    }
+    } */
 
     .btn {
         width: 140px;
