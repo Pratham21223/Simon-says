@@ -75,10 +75,13 @@ function reset() {
 }
 
 // ✅ Flash sequence when "Show Answer" is clicked
-answerBtn.addEventListener("click", function () {
-  let delay = 0;
+answerBtn.addEventListener("click",async function () {
+  function delay(){
+  return new Promise(resolve=> setTimeout(resolve,100))
+}
   for (let i = 0; i < compInp.length; i++) {
     let btn = document.querySelector(`.${compInp[i]}`);
     setTimeout(() => flash(btn), 300 * i);
-  }
+    await delay();
+}
 });
