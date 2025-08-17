@@ -1,62 +1,84 @@
-const texts = [
-    "Frontend Developer.",
-    "Tech Enthusiast.",
-    "Problem Solver.",
-    "Terminal.",
-    "Git & Github.",
-    "Bootstrap.",
-    "Welcome to my Portfolio!"
-    ];
-    let textIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 50;
-    const erasingSpeed = 50;
-    const delayBetween = 1000;
-    function typeWriter() {
-      const element = document.getElementById("typewriter");
-      const currentText = texts[textIndex];
-      if (!isDeleting && charIndex < currentText.length) {
-        element.textContent += currentText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, typingSpeed);
-      } 
-      else if (isDeleting && charIndex > 0) {
-        element.textContent = currentText.substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(typeWriter, erasingSpeed);
-      } 
-      else {
-        if (!isDeleting) {
-          isDeleting = true;
-          setTimeout(typeWriter, delayBetween);
-        } else {
-          isDeleting = false;
-          textIndex = (textIndex + 1) % texts.length;
-          setTimeout(typeWriter, typingSpeed);
-        }
-      }
-    }
-    typeWriter();
+let userInp = [];
+let compInp = [];
+let gameStart = false;
+let level = 0;
 
-let tabLinks=document.querySelectorAll('.tab-links')
-    let tabContents=document.querySelectorAll('.tab-contents')
-    function opentab(tabName){
-        for(tabLink of tabLinks){
-            tabLink.classList.remove("active-link")
-        }
-        for(tabContent of tabContents){
-            tabContent.classList.remove("active-tab")
-        }
-        event.currentTarget.classList.add("active-link")
-        document.getElementById(tabName).classList.add("active-tab");
-        
-    }
+let h2 = document.querySelector("h2");
+let h3 = document.querySelector("h3");
+let btns = ["btn-1", "btn-2", "btn-3", "btn-4"];
+let startBtn = document.querySelector("#start-btn");
+let answerBtn = document.querySelector("#ans-btn");
 
-    let sidemenu=document.getElementById("sidemenu");
-    function openmenu(){
-      sidemenu.style.right="0";
+startBtn.addEventListener("click", function () {
+  if (!gameStart) {
+    compInp = [];
+    level = 0;
+    userInp = [];
+    levelUp();
+    gameStart = true;
+    startBtn.style.display = "none";
+    answerBtn.style.display = "none";
+  }
+});
+
+function levelUp() {
+  // h3.style.display = "none";
+  userInp = [];
+  level++;
+  h2.innerText = `Level ${level}`;
+  let randIdx = Math.floor(Math.random() * 4);
+  let randBtn = document.querySelector(`.${btns[randIdx]}`);
+  flash(randBtn);
+  compInp.push(btns[randIdx]);
+}
+
+function flash(btn) {
+  btn.classList.add("flash");
+  setTimeout(function () {
+    btn.classList.remove("flash");
+  }, 300);
+}
+
+function checkAns(idx) {
+  if (userInp[idx] === compInp[idx]) {
+    if (userInp.length === compInp.length) {
+      setTimeout(levelUp, 1000);
     }
-    function closemenu(){
-      sidemenu.style.right="-200px";
-    }
+  } else {
+    h2.innerHTML = `Game over! Your score was <i><b>${level - 1}<b></i>.`;
+    answerBtn.style.display = "inline-block";
+    reset();
+  }
+}
+
+function user() {
+  if (gameStart) {
+    let btn = this;
+    flash(btn);
+    let userColor = btn.getAttribute("id");
+    userInp.push(userColor);
+    checkAns(userInp.length - 1);
+  }
+}
+
+let selBtns = document.querySelectorAll(".btn");
+for (let btn of selBtns) {
+  btn.addEventListener("click", user);
+}
+
+function reset() {
+  h3.style.display = "block";
+  gameStart = false;
+  userInp = [];
+  level = 0;
+  startBtn.style.display = "inline-block";
+}
+
+// ✅ Flash sequence when "Show Answer" is clicked
+answerBtn.addEventListener("click", function () {
+  let delay = 0;
+  for (let i = 0; i < compInp.length; i++) {
+    let btn = document.querySelector(`.${compInp[i]}`);
+    setTimeout(() => flash(btn), 300 * i);
+  }
+});
